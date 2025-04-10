@@ -1,5 +1,6 @@
 using ApiMediatr.Core.Application.Interfaces;
 using ApiMediatr.Infrastructure.Persistence;
+using ApiMediatr.Core.Application.Queries;
 using MediatR;
 using System.Collections.Generic;
 using System.Reflection;
@@ -14,10 +15,13 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 // Fix for CS1503: Use the correct overload of AddMediatR
-builder.Services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(Assembly.GetExecutingAssembly()));
+builder.Services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(typeof(GetUsersQuery).Assembly));
 
 // Register UserRepository
-builder.Services.AddScoped<IUserRepository, UserRepository>();
+//builder.Services.AddScoped<IUserRepository, UserRepository>();
+
+// Register UnitOfWork
+builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 
 var app = builder.Build();
 
