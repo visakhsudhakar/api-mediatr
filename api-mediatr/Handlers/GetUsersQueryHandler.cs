@@ -1,8 +1,7 @@
-
-using MediatR;
-using ApiMediatr.Core.Application.Queries;
 using ApiMediatr.Core.Application.Interfaces;
+using ApiMediatr.Core.Application.Queries;
 using ApiMediatr.Core.Domain.Entities; // Make sure this using statement is present
+using MediatR;
 
 namespace ApiMediatr.Handlers
 {

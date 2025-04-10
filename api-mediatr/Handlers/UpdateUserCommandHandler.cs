@@ -1,14 +1,13 @@
-
-using ApiMediatr.Core.Application.Commands;
+using System.Threading.Tasks;
+using System.Threading;
+using MediatR;
 using ApiMediatr.Core.Application.Interfaces;
 using ApiMediatr.Core.Domain.Entities;
-using MediatR;
-using System.Threading;
-using System.Threading.Tasks;
+using ApiMediatr.Core.Application.Commands;
 
 namespace ApiMediatr.Handlers
 {
-    public class UpdateUserCommandHandler : IRequestHandler<UpdateUserCommand>
+    public class UpdateUserCommandHandler : IRequestHandler<UpdateUserCommand, Unit>
     {
         private readonly IUnitOfWork _unitOfWork;
 

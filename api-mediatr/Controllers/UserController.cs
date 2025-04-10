@@ -1,7 +1,5 @@
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
-using System.Collections.Generic;
-using System.Threading;
 using ApiMediatr.Core.Application.Commands;
 using ApiMediatr.Core.Application.Queries;
 using System.Threading.Tasks;
@@ -36,7 +34,7 @@ namespace ApiMediatr.Controllers
                 return BadRequest("User data is required.");
             }
 
-            var result = await _mediator.Send(new AddUserCommand(user), cancellationToken);
+            var result = await _mediator.Send(new AddUserCommand(user.Name, user.Email), cancellationToken);
 
             // Assuming AddUserCommand returns the ID of the newly created user
             return CreatedAtAction(nameof(GetUsers), new { id = result }, user);
@@ -50,8 +48,7 @@ namespace ApiMediatr.Controllers
                 return BadRequest("Invalid user data or ID mismatch.");
             }
 
-            var result = await _mediator.Send(new UpdateUserCommand(user), cancellationToken);
-
+            var result = await _mediator.Send(new UpdateUserCommand(user.Id, user.Name, user.Email), cancellationToken);
             return Ok(result);
         }
     }

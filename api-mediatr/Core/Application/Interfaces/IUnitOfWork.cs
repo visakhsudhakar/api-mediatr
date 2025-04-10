@@ -1,6 +1,5 @@
 
 using System.Threading.Tasks;
-using ApiMediatr.Core.Domain.Entities;
 
 namespace ApiMediatr.Core.Application.Interfaces
 {

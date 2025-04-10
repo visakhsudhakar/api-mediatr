@@ -1,11 +1,11 @@
 
-using ApiMediatr.Core.Domain.Entities;
 using MediatR;
 
 namespace ApiMediatr.Core.Application.Commands
-{
-    public class AddUserCommand : IRequest
-    {
+{    
+    public class AddUserCommand : IRequest<Unit>
+    {        
+        
         public string Name { get; set; }
         public string Email { get; set; }
 

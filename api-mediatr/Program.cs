@@ -1,9 +1,7 @@
-using ApiMediatr.Core.Application.Interfaces;
-using ApiMediatr.Infrastructure.Persistence;
 using ApiMediatr.Core.Application.Queries;
 using MediatR;
-using System.Collections.Generic;
-using System.Reflection;
+using ApiMediatr.Core.Application.Interfaces;
+using ApiMediatr.Infrastructure.Persistence;
 
 var builder = WebApplication.CreateBuilder(args);
 

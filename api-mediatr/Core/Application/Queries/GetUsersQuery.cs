@@ -1,4 +1,3 @@
-csharp
 using ApiMediatr.Core.Domain.Entities;
 using MediatR;
 
