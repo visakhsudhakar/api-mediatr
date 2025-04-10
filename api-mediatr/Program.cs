@@ -1,5 +1,6 @@
 using ApiMediatr.Core.Application.Queries;
 using MediatR;
+using Microsoft.EntityFrameworkCore;
 using ApiMediatr.Core.Application.Interfaces;
 using ApiMediatr.Infrastructure.Persistence;
 
@@ -12,7 +13,7 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-builder.Services.AddDbContext<AppDbContext>();
+builder.Services.AddDbContext<AppDbContext>(options => options.UseInMemoryDatabase("InMemoryDb"));
 
 // Fix for CS1503: Use the correct overload of AddMediatR
 builder.Services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(typeof(GetUsersQuery).Assembly));
