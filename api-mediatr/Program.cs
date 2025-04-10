@@ -41,11 +41,11 @@ app.UseAuthorization();
 
 app.MapControllers();
 
-app.Run();
-
 using (var scope = app.Services.CreateScope())
 {
     var dbContext = scope.ServiceProvider.GetRequiredService<AppDbContext>();
     dbContext.Users.AddRange(new User("John Doe", "john.doe@example.com"), new User("Jane Smith", "jane.smith@example.com"));
     dbContext.SaveChanges();
 }
+
+app.Run();
