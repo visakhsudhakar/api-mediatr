@@ -1,20 +1,31 @@
-
 using MediatR;
 using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
+using ApiMediatr.Core.Application.Interfaces;
+using ApiMediatr.Core.Domain.Entities;
+using System.Linq;
 
 namespace ApiMediatr.Handlers
 {
-    public class GetUserQuery : IRequest<List<string>>
+    public class GetUserQuery : IRequest<List<User>>
     {
     }
 
-    public class GetUserHandler : IRequestHandler<GetUserQuery, List<string>>
+    public class GetUserHandler : IRequestHandler<GetUserQuery, List<User>>
     {
-        public async Task<List<string>> Handle(GetUserQuery request, CancellationToken cancellationToken)
+        private readonly IUserRepository _userRepository;
+
+        public GetUserHandler(IUserRepository userRepository)
         {
-            return new List<string> { "User1", "User2", "User3" };
+            _userRepository = userRepository;
+        }
+
+        public async Task<List<User>> Handle(GetUserQuery request, CancellationToken cancellationToken)
+        {
+            var users = await _userRepository.GetUsersAsync();
+            return users.ToList();
         }
     }
+
 }

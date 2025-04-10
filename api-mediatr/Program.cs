@@ -1,5 +1,7 @@
+using ApiMediatr.Core.Application.Interfaces;
+using ApiMediatr.Infrastructure.Persistence;
 using MediatR;
-using Microsoft.Extensions.DependencyInjection;
+using System.Collections.Generic;
 using System.Reflection;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -13,6 +15,9 @@ builder.Services.AddSwaggerGen();
 
 // Fix for CS1503: Use the correct overload of AddMediatR
 builder.Services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(Assembly.GetExecutingAssembly()));
+
+// Register UserRepository
+builder.Services.AddScoped<IUserRepository, UserRepository>();
 
 var app = builder.Build();
 
