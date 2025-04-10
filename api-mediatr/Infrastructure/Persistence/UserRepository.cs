@@ -1,33 +1,36 @@
 using ApiMediatr.Core.Application.Interfaces;
 using ApiMediatr.Core.Domain.Entities;
+using ApiMediatr.Infrastructure.Persistence;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+
 namespace ApiMediatr.Infrastructure.Persistence
 {
-    public class UserRepository : IUserRepository
+    public class UserRepository(AppDbContext context) : IUserRepository
     {
+        private readonly AppDbContext _context = context;
+
         public Task<List<User>> GetUsersAsync()
         {
-            // Sample data
-            var users = new List<User>
+            if (_context.Users == null)
             {
-                new User("John Doe", "john.doe@example.com") { Id = 1 },
-                new User("Jane Smith", "jane.smith@example.com") { Id = 2 },
-                new User("Peter Jones", "peter.jones@example.com") { Id = 3 }
-            };
+                return Task.FromResult(new List<User>());
+            }
+
+            var users = _context.Users.ToList();            
             return Task.FromResult(users);
         }
-
 
         public Task Update(User user)
         {
             // Update logic
+            _context.Users?.Update(user);
             return Task.CompletedTask;
         }
 
         public Task Add(User user)
         {
-            //Add Logic
+            _context.Users?.Add(user);
             return Task.CompletedTask;
         }
     }
