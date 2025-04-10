@@ -1,4 +1,4 @@
-csharp
+
 namespace ApiMediatr.Core.Domain.Entities
 {
     public class User

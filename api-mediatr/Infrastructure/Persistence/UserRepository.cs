@@ -1,4 +1,4 @@
-csharp
+
 using ApiMediatr.Core.Application.Interfaces;
 using ApiMediatr.Core.Domain.Entities;
 using System.Collections.Generic;
