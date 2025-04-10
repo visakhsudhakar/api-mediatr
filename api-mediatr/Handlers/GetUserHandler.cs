@@ -1,4 +1,4 @@
-csharp
+
 using MediatR;
 using System.Collections.Generic;
 using System.Threading;
