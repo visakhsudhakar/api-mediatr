@@ -3,6 +3,7 @@ using MediatR;
 using Microsoft.EntityFrameworkCore;
 using ApiMediatr.Core.Application.Interfaces;
 using ApiMediatr.Infrastructure.Persistence;
+using ApiMediatr.Core.Domain.Entities;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -41,3 +42,10 @@ app.UseAuthorization();
 app.MapControllers();
 
 app.Run();
+
+using (var scope = app.Services.CreateScope())
+{
+    var dbContext = scope.ServiceProvider.GetRequiredService<AppDbContext>();
+    dbContext.Users.AddRange(new User("John Doe", "john.doe@example.com"), new User("Jane Smith", "jane.smith@example.com"));
+    dbContext.SaveChanges();
+}
