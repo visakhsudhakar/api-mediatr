@@ -2,6 +2,7 @@ using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
 using System.Threading;
+using ApiMediatr.Core.Application.Queries;
 using System.Threading.Tasks;
 
 namespace ApiMediatr.Controllers
@@ -20,20 +21,8 @@ namespace ApiMediatr.Controllers
         [HttpGet]
         public async Task<IActionResult> GetUsers(CancellationToken cancellationToken)
         {
-            var result = await _mediator.Send(new GetUsersRequest(), cancellationToken);
+            var result = await _mediator.Send(new GetUsersQuery(), cancellationToken);
             return Ok(result);
-        }
-    }
-
-    public class GetUsersRequest : IRequest<List<string>>
-    {
-    }
-    
-    public class GetUsersRequestHandler : IRequestHandler<GetUsersRequest, List<string>>
-    {
-        public async Task<List<string>> Handle(GetUsersRequest request, CancellationToken cancellationToken)
-        {
-            return new List<string> { "User1", "User2", "User3" };
         }
     }
 }
