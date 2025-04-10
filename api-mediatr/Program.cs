@@ -18,6 +18,7 @@ builder.Services.AddDbContext<AppDbContext>();
 builder.Services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(typeof(GetUsersQuery).Assembly));
 
 // Register UserRepository
+builder.Services.AddScoped<IUserRepository, UserRepository>();
 //builder.Services.AddScoped<IUserRepository, UserRepository>();
 
 // Register UnitOfWork

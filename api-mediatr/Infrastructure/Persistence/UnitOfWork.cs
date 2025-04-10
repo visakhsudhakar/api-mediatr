@@ -12,13 +12,7 @@ namespace ApiMediatr.Infrastructure.Persistence
         private IUserRepository _userRepository;
         private IDbContextTransaction? _transaction;
 
-        public UnitOfWork(AppDbContext context, IUserRepository userRepository)
-        {
-            _context = context;
-            _userRepository = userRepository;
-        }
-
-        public IUserRepository UserRepository => _userRepository;
+        
 
         public async Task<int> SaveChangesAsync()
         {
@@ -40,5 +34,13 @@ namespace ApiMediatr.Infrastructure.Persistence
             _transaction?.Dispose();
             _context.Dispose();
         }
+
+        public UnitOfWork(AppDbContext context, IUserRepository userRepository)
+        {
+            _context = context;
+            _userRepository = userRepository;
+        }
+
+        public IUserRepository UserRepository => _userRepository;
     }
 }
